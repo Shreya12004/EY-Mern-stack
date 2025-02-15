@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <script>
+        function bmifunction() {
+            // Retrieve input values
+            var weight = parseFloat(document.getElementById("weight").value);
+            var height = parseFloat(document.getElementById("height").value);
+
+            if (!weight || !height || height <= 0 || weight <= 0) {
+                document.getElementById('restext').innerText = "Please enter valid weight and height.";
+                return;
+            }
+
+            // Convert height to meters if entered in cm
+            height = height / 100;
+
+            // Calculate BMI
+            var bmi = weight / (height * height);
+            bmi = bmi.toFixed(2); // Limit to 2 decimal places
+
+            // Determine BMI category
+            var category = "";
+            if (bmi < 18.5) {
+                category = "Underweight";
+                document.getElementById('image').src="";
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                category = "Normal Weight";
+                document.getElementById('image').src="normal.jpg";
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                category = "Overweight";
+                document.getElementById('image').src="C:\Users\Shreya\Desktop\Mern sack\Day5\overweight.jpg";
+            } else {
+                category = "Obese";
+                document.getElementById('image').src="";
+            }
+
+            // Display the result
+            document.getElementById('restext').innerText = `Your BMI is: ${bmi} (${category})`;
+        }
+        
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+    <h1>BMI Calculator</h1>
+    <form>
+        <label for="weight">Weight (kg): </label>
+        <input type="number" id="weight" placeholder="Enter weight in kg" step="0.1"><br><br>
+        <label for="height">Height (cm): </label>
+        <input type="number" id="height" placeholder="Enter height in cm" step="0.1"><br><br>
+        <input type="button" onclick="bmifunction()" value="Calculate">
+    </form>
+    <h2 id="restext">Result: </h2>
+    <img src="/bmi.jpg" width="400px" height="200px" >
+</body>
+</html>
